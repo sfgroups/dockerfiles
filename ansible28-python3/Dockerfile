@@ -1,4 +1,4 @@
-FROM python:3.8.0a3-alpine3.9
+FROM python:rc-alpine
 
 RUN	apk --update add \
 		bash \
@@ -30,6 +30,7 @@ RUN	apk --update add \
 		python-string-utils \
 		ruamel.yaml \
 		six \
+                ansible-cmdb \
 	&& apk del build-dependencies \
 	&& rm -rf /var/cache/apk/*
 
