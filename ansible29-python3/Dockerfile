@@ -36,13 +36,13 @@ RUN	apk --update add \
 
 RUN	mkdir -p /etc/ansible \		
 	&& echo 'localhost' > /etc/ansible/hosts \			
-	&& mkdir -p ~/.ssh && touch ~/.ssh/known_hosts
-	
-ENV PATH="/:${PATH}"
+	&& mkdir -p ~/.ssh && touch ~/.ssh/known_hosts \
+	&& mkdir -p /playbooks
+COPY bashrc /root/.bashrc
 
-ONBUILD	WORKDIR	/tmp
-ONBUILD	COPY 	. /tmp
-ONBUILD	RUN	ansible -c local -m setup all > /dev/null
+WORKDIR /playbooks
+RUN ansible -c local -m setup all > /dev/null
+ENV PATH="/:${PATH}"
 CMD ["bash"]
 
 

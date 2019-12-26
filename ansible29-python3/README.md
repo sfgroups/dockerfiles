@@ -2,13 +2,23 @@
 
 Dockerfile to create python3 with Ansible .2.9
 
-docker build -t ansible-python3 .
+docker build -t sfgroups/ansible-python3 .
 
-docker run --rm --name ansible -it ansible-python3 ansible --version
-ansible 2.9.2
-  config file = None
-  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
-  ansible python module location = /usr/local/lib/python3.9/site-packages/ansible
-  executable location = /usr/local/bin/ansible
-  python version = 3.9.0a1 (default, Dec 11 2019, 00:42:23) [GCC 8.3.0]
+docker run --rm --name ansible -it sfgroups/ansible-python3 ansible --version
 
+docker run --rm -it \
+        --name ansible \
+        -v ~/.ssh:/root/.ssh:ro \
+        -v ~/.kube:/.kube \
+        -v $(pwd):/playbooks \
+        sfgroups/ansible-python3
+
+ansible -i hosts all -m ping 
+ansible -i hosts all -m setup
+
+
+
+mkdir out
+ansible -m setup --tree out/ all
+ansible-cmdb out/ > overview.html
+ansible-cmdb -t html_fancy_split -i hosts out/
