@@ -31,6 +31,7 @@ RUN	apk --update add \
 		ruamel.yaml \
 		six \
                 ansible-cmdb \
+                awscli \
 	&& apk del build-dependencies \
 	&& rm -rf /var/cache/apk/*
 
@@ -39,9 +40,11 @@ RUN	mkdir -p /etc/ansible \
 	&& mkdir -p ~/.ssh && touch ~/.ssh/known_hosts \
 	&& mkdir -p /playbooks
 COPY bashrc /root/.bashrc
+COPY aws /usr/local/bin/aws
 
 WORKDIR /playbooks
-RUN ansible -c local -m setup all > /dev/null
+RUN ansible -c local -m setup all > /dev/null && \
+	chmod 755 /usr/local/bin/aws
 ENV PATH="/:${PATH}"
 CMD ["bash"]
 
