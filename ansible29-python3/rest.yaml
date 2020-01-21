@@ -5,12 +5,11 @@
   - debug: msg="it works!"
 
   - name: Create a JIRA issue
-  uri:
-    url: https://your.jira.example.com/rest/api/2/issue/
-    user: your_username
-    password: your_pass
-    method: POST
-    body: "{{ lookup('file','issue.json') }}"
-    force_basic_auth: yes
-    status_code: 201
-    body_format: json
+    uri:
+        url: http://api.open-notify.org/astros.json
+        user: your_username
+        password: your_pass
+        method: GET
+        body: "{{ lookup('file','issue.json') }}"
+        
+        body_format: json
