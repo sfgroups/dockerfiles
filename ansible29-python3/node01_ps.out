@@ -1,0 +1,9 @@
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 16:35 ?        00:00:00 /tini -g -- /bin/sh -c /start.sh
+root         6     1  0 16:35 ?        00:00:00 /bin/bash /start.sh
+root         9     6  0 16:35 ?        00:00:00 /usr/sbin/sshd -D
+root      2022     9  1 17:07 ?        00:00:00 sshd: root [priv]
+root      2024  2022  1 17:07 ?        00:00:00 sshd: root@pts/0
+root      2182  2024  0 17:07 pts/0    00:00:00 /bin/sh -c /usr/libexec/platform-python /root/.ansible/tmp/ansible-tmp-1581786462.1477702-123120563119682/AnsiballZ_command.py && sleep 0
+root      2191  2182  0 17:07 pts/0    00:00:00 /usr/libexec/platform-python /root/.ansible/tmp/ansible-tmp-1581786462.1477702-123120563119682/AnsiballZ_command.py
+root      2192  2191  0 17:07 pts/0    00:00:00 ps -fed

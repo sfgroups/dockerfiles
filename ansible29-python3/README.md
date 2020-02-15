@@ -17,8 +17,12 @@ ansible -i hosts all -m ping
 ansible -i hosts all -m setup
 
 
+CMD DB
+-----
 
 mkdir out
 ansible -m setup --tree out/ all
 ansible-cmdb out/ > overview.html
 ansible-cmdb -t html_fancy_split -i hosts out/
+
+cat node01_pks.json |jq '."zlib" | .[].version'

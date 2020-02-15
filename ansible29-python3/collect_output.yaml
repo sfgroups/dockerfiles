@@ -1,0 +1,23 @@
+---
+- hosts: all
+  tasks:
+    - name: get process list
+      shell: ps -fed
+      register: result
+    
+    - name: copy the output to a local file
+      copy:
+        content: "{{ result.stdout }}"
+        dest: "{{ inventory_hostname }}_ps.out"
+      delegate_to: localhost
+    
+    - name: Gather the rpm package facts
+      package_facts:
+        manager: auto
+      register: result
+
+    - name: copy the output to a local file
+      copy:
+        content: "{{ ansible_facts.packages }}"
+        dest: "{{ inventory_hostname }}_pks.json"
+      delegate_to: localhost
